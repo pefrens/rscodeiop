@@ -1,0 +1,8 @@
+# dot-files
+^\..*$
+
+# rstudio
+^.*\.Rproj$
+^\.Rproj\.user$
+
+^LICENSE\.md$

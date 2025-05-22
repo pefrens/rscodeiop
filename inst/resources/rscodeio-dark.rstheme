@@ -1,0 +1,224 @@
+/* Tema oscuro para RStudio basado en rscodeio */
+/* rs-theme-name: rscodeio-dark */
+/* rs-theme-is-dark: TRUE */
+
+/* Variables de color */
+:root {
+  /* Editor */
+  --editor-background: #1e1e1e; /* Fondo oscuro más suave */
+  --editor-foreground: #d4d4d4; /* Texto claro para mejor contraste */
+  --separator: #404040; /* Separadores sutiles */
+  --toolbar: #252526; /* Barra de herramientas */
+  --tab: #2d2d2d; /* Pestañas inactivas */
+  --selected-tab: #1e1e1e; /* Pestaña activa */
+
+  /* Sintaxis */
+  --type-declaration: #56b6c2; /* Más brillante para mejor legibilidad */
+  --language-constant: #569cd6;
+  --numeric-constant: #b5cea8;
+  --string: #ce9178;
+  --regex: #d16969;
+  --keyword: #c586c0;
+  --function-declaration: #dcdcaa;
+  --variable: #9cdcfe;
+  --comment: #6a9955; /* Mayor contraste para comentarios */
+  --inline-code: #ce9178; /* Código en Markdown */
+  --heading: #569cd6; /* Encabezados en Markdown */
+}
+
+/* Estilos generales del editor */
+.ace_editor,
+.rstudio-themes-flat.ace_editor_theme {
+  background-color: var(--editor-background);
+  color: var(--editor-foreground);
+  line-height: 1.4; /* Mejor legibilidad */
+}
+
+/* Gutter (numeración de líneas) */
+.ace_gutter {
+  background: var(--editor-background);
+  color: #858585;
+  box-shadow: inset 1px 0 0 0 var(--separator);
+}
+
+/* Cursor y selección */
+.ace_cursor {
+  border-color: #e4e4e4;
+  width: 2px;
+}
+
+.ace_marker-layer .ace_selection {
+  background: rgba(100, 100, 100, 0.3); /* Selección más suave */
+}
+
+.ace_marker-layer .ace_selected-word {
+  background: rgba(255, 165, 0, 0.3); /* Resaltado de palabra */
+}
+
+/* Sintaxis */
+.ace_keyword,
+.ace_meta,
+.ace_storage,
+.ace_storage.ace_type,
+.ace_support.ace_type {
+  color: var(--keyword);
+}
+
+.ace_constant.ace_language,
+.ace_keyword.ace_virtual-comment {
+  color: var(--language-constant);
+}
+
+.ace_constant.ace_numeric,
+.ace_constant.ace_other {
+  color: var(--numeric-constant);
+}
+
+.ace_string {
+  color: var(--string);
+}
+
+.ace_string.ace_regexp {
+  color: var(--regex);
+}
+
+.ace_comment {
+  color: var(--comment);
+}
+
+.ace_entity.ace_name.ace_function,
+.ace_identifier.ace_support.ace_function:not(.ace_virtual-comment) {
+  color: var(--function-declaration);
+}
+
+.ace_identifier,
+.ace_variable {
+  color: var(--variable);
+}
+
+.ace_support.ace_class,
+.ace_support.ace_type {
+  color: var(--type-declaration);
+}
+
+/* Markdown */
+.ace_heading,
+.ace_markup.ace_heading {
+  color: var(--heading);
+}
+
+.ace_support.ace_function {
+  color: var(--inline-code);
+}
+
+.ace_constant.ace_language.ace_boolean.ace_text {
+  font-style: italic;
+}
+
+.ace_constant.ace_numeric.ace_text {
+  font-weight: bold;
+}
+
+/* Plegado de código */
+.ace_gutter .ace_fold-widget {
+  background: transparent;
+  border: none;
+  width: 17px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.ace_gutter .ace_fold-widget.ace_closed {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath d='M11 4v7H4V4h7m1-1H3v9h9V3z' fill='%235a5a5a'/%3E%3Cpath fill='none' stroke='%23c5c5c5' stroke-miterlimit='10' d='M10 7.5H5M7.5 5v5'/%3E%3C/svg%3E");
+}
+
+.ace_gutter .ace_fold-widget.ace_open {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath d='M11 4v7H4V4h7m1-1H3v9h9V3z' fill='%235a5a5a'/%3E%3Cpath fill='none' stroke='%23c5c5c5' stroke-miterlimit='10' d='M10 7.5H5'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.ace_gutter:hover .ace_fold-widget.ace_open {
+  opacity: 1;
+}
+
+/* Barras de herramientas */
+.rstudio-themes-dark .rstheme_toolbarWrapper,
+.rstudio-themes-dark .rstheme_secondaryToolbar {
+  background: var(--toolbar);
+  border-color: var(--toolbar);
+}
+
+/* Pestañas */
+.rstudio-themes-dark .gwt-TabLayoutPanelTabs {
+  background: var(--toolbar);
+}
+
+.rstudio-themes-dark .gwt-TabLayoutPanelTab:not(.gwt-TabLayoutPanelTab-selected) .rstheme_tabLayoutCenter {
+  background: var(--tab);
+  color: var(--editor-foreground);
+  border: 1px solid var(--toolbar);
+  cursor: pointer;
+}
+
+.rstudio-themes-dark .gwt-TabLayoutPanelTab-selected .rstheme_tabLayoutCenter {
+  background: var(--selected-tab);
+  color: #ffffff;
+}
+
+/* Terminal */
+.terminal {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-feature-settings: "liga" 0;
+}
+
+.terminal .xterm-cursor {
+  background: #d4d4d4;
+  color: #1e1e1e;
+}
+
+.terminal .xterm-selection div {
+  background: rgba(212, 212, 212, 0.3);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 121, 0.5);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.8);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Menús */
+.rstudio-themes-flat .themedPopupPanel,
+.rstudio-themes-flat .popupMiddleCenter {
+  background: var(--tab);
+  color: var(--editor-foreground);
+  border: 1px solid var(--separator);
+}
+
+.rstudio-themes-flat .gwt-MenuItem-selected {
+  background: #094771;
+}
+
+/* Paleta de colores para terminal (mantenida parcialmente, reducida para claridad) */
+.xtermColor0 { color: #2e3436; }
+.xtermBgColor0 { background-color: #2e3436; }
+.xtermColor1 { color: #cc0000; }
+.xtermBgColor1 { background-color: #cc0000; }
+/* ... (continuar con colores necesarios, omitiendo redundancias) */

@@ -1,0 +1,20 @@
+Package: rscodeiop
+Title: A VSCode skin for RStudio
+Version: 0.1.0
+Authors@R: c(person("Anthony", "North",
+             email = "anthony.jl.north@gmail.com", 
+             role = c("aut", "cre")),
+             person("Miles", "McBain",
+             email = "miles.mcbain@gmail.com", 
+             role = "ctb"),
+             person("Paul Efren", "Santos Andrade", 
+             email = "paulefren16@gmail.com", 
+             role = "ctb"))
+Description: It really just modifies RStudio presentation.
+Depends: R (>= 3.3.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    rstudioapi
+RoxygenNote: 7.3.2
