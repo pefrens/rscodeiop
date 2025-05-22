@@ -1,25 +1,30 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
 # rscodeiop
 
-An enhanced RStudio theme inspired by Visual Studio Code - updated and
-improved version by pefrens.
+An enhanced RStudio theme inspired by Visual Studio Code - updated and improved version by pefrens.
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/pefrens/rscodeiop/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pefrens/rscodeiop/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
 
-`rscodeiop` is an improved and updated version of the popular `rscodeio`
-theme, bringing Visual Studio Code’s sleek dark interface to RStudio.
-This package includes enhanced functionality, better error handling, and
-improved user experience while maintaining the beautiful VS
-Code-inspired aesthetics.
+`rscodeiop` is an improved and updated version of the popular `rscodeio` theme, bringing Visual Studio Code's sleek dark interface to RStudio. This package includes enhanced functionality, better error handling, and improved user experience while maintaining the beautiful VS Code-inspired aesthetics.
 
 ### Key Improvements in rscodeiop
 
@@ -31,16 +36,14 @@ Code-inspired aesthetics.
 - **Comprehensive documentation** and examples
 
 <p align="center">
-
-<img src="./inst/media/rscodeio.png" width="480" height="270" alt="RSCodeIO Theme Preview">
+  <img src="./inst/media/rscodeio.png" width="480" height="270" alt="RSCodeIO Theme Preview">
 </p>
 
 ## Installation
 
-You can install the development version of `rscodeiop` from
-[GitHub](https://github.com/pefrens/rscodeiop) with:
+You can install the development version of `rscodeiop` from [GitHub](https://github.com/pefrens/rscodeiop) with:
 
-``` r
+```r
 # Using pak (recommended)
 pak::pak("pefrens/rscodeiop")
 
@@ -52,28 +55,28 @@ pak::pak("pefrens/rscodeiop")
 ## Prerequisites
 
 - **RStudio 1.2.0 or higher** (required for theme support)
-- **Administrator privileges** for menu theme installation
-  (Windows/Linux only)
+- **Administrator privileges** for menu theme installation (Windows/Linux only)
 
 ### Important Note About Permissions
 
-`rscodeiop` modifies RStudio’s menu themes by updating style sheets in
-the RStudio installation directory. This requires administrator
-privileges:
+`rscodeiop` modifies RStudio's menu themes by updating style sheets in the RStudio installation directory. This requires administrator privileges:
 
-**Windows:** - Right-click on RStudio shortcut or menu icon - Select
-**“Run as Administrator”**
+**Windows:**
+- Right-click on RStudio shortcut or menu icon
+- Select **"Run as Administrator"**
 
-**Linux:** - Start RStudio from terminal: `sudo rstudio --no-sandbox`
+**Linux:**
+- Start RStudio from terminal: `sudo rstudio --no-sandbox`
 
-**macOS:** - No administrator privileges required - Menu theming is not
-supported (inherits from macOS system theme)
+**macOS:**
+- No administrator privileges required
+- Menu theming is not supported (inherits from macOS system theme)
 
 ## Quick Start
 
 ### Basic Installation
 
-``` r
+```r
 # Install theme with menu styling (requires admin privileges)
 rscodeiop::install_theme()
 
@@ -83,7 +86,7 @@ rscodeiop::install_theme(menus = FALSE)
 
 ### Check Installation Status
 
-``` r
+```r
 # Get detailed status information
 rscodeiop::print_theme_status()
 
@@ -98,14 +101,14 @@ rscodeiop::is_menu_theme_active()
 
 ### Force Reinstallation
 
-``` r
+```r
 # Reinstall even if already present
 rscodeiop::install_theme(force = TRUE)
 ```
 
 ### Menu Theme Management
 
-``` r
+```r
 # Activate menu theme separately
 rscodeiop::activate_menu_theme()
 
@@ -119,7 +122,7 @@ rscodeiop::deactivate_menu_theme(silent = TRUE)
 
 ### Complete Uninstallation
 
-``` r
+```r
 # Remove all rscodeiop themes and restore original menus
 rscodeiop::uninstall_theme()
 ```
@@ -128,22 +131,22 @@ rscodeiop::uninstall_theme()
 
 For the best visual experience, enable these RStudio settings:
 
-1.  **Tools** → **Global Options…** → **Code** → **Display**:
-    - ☑ **Highlight selected line**
-    - ☑ **Show indent guides**
-    - ☑ **Show syntax highlighting in console input**
-    - ☑ **Highlight R function calls**
-2.  **Tools** → **Global Options…** → **Appearance**:
-    - Select **rscodeiop** or **tomorrow night bright (rscodeio)** theme
+1. **Tools** → **Global Options…** → **Code** → **Display**:
+   - ☑ **Highlight selected line**
+   - ☑ **Show indent guides**
+   - ☑ **Show syntax highlighting in console input**
+   - ☑ **Highlight R function calls**
+
+2. **Tools** → **Global Options…** → **Appearance**:
+   - Select **rscodeiop** or **tomorrow night bright (rscodeio)** theme
 
 ## Theme Management
 
 ### Switching Themes
 
-The menu theme persists even when switching to other RStudio themes. To
-manage this:
+The menu theme persists even when switching to other RStudio themes. To manage this:
 
-``` r
+```r
 # Before switching to another theme, deactivate menu theme
 rscodeiop::deactivate_menu_theme()
 
@@ -158,7 +161,7 @@ rscodeiop::activate_menu_theme()
 
 If you encounter issues:
 
-``` r
+```r
 # Check current status
 rscodeiop::print_theme_status()
 
@@ -175,33 +178,30 @@ rscodeiop::install_theme(menus = FALSE)
 `rscodeiop` has been tested on:
 
 - ✅ **Windows 10/11** (with RStudio Desktop)
-- ✅ \*\*Ubuntu/Pop!\_OS Linux\*\* (with RStudio Desktop)
+- ✅ **Ubuntu/Pop!_OS Linux** (with RStudio Desktop)
 - ✅ **macOS** (editor themes only, menu themes not supported)
 - ⚠️ **RStudio Server** (editor themes only, menu themes not supported)
 
-## What’s Included
+## What's Included
 
 ### Editor Themes
-
 - **rscodeiop** - Main dark theme inspired by VS Code
 - **tomorrow night bright (rscodeio)** - Alternative bright variant
 
 ### Menu Themes (Windows/Linux only)
-
 - Dark menu bars and dialogs
 - Consistent VS Code-inspired styling
 - Automatic backup and restoration
 
 ## Contributing
 
-Issues and pull requests are welcome! Please visit the [GitHub
-repository](https://github.com/pefrens/rscodeiop).
+Issues and pull requests are welcome! Please visit the [GitHub repository](https://github.com/pefrens/rscodeiop).
 
 ### Reporting Issues
 
 When reporting issues, please include:
 
-``` r
+```r
 # Run this and include the output
 rscodeiop::print_theme_status()
 sessionInfo()
@@ -209,19 +209,14 @@ sessionInfo()
 
 ## Credits
 
-This package is an enhanced version of the original
-[`rscodeio`](https://github.com/anthonynorth/rscodeio) by Anthony North.
-Special thanks to the original author for creating the beautiful VS
-Code-inspired theme foundation.
+This package is an enhanced version of the original [`rscodeio`](https://github.com/anthonynorth/rscodeio) by Anthony North. Special thanks to the original author for creating the beautiful VS Code-inspired theme foundation.
 
 **Improvements by:** [pefrens](https://github.com/pefrens)
 
 ## License
 
-This project maintains the same license as the original `rscodeio`
-package.
+This project maintains the same license as the original `rscodeio` package.
 
-------------------------------------------------------------------------
+---
 
-*Note: After installation with menu themes, restart RStudio normally
-(without administrator privileges) to see the full theme applied.*
+*Note: After installation with menu themes, restart RStudio normally (without administrator privileges) to see the full theme applied.*
