@@ -43,7 +43,7 @@ install_theme <- function(menus = TRUE, force = FALSE) {
   # Install theme files
   tryCatch({
     # Get theme file paths
-    default_theme_path <- system.file("resources", "rscodeio.rstheme",
+    default_theme_path <- system.file("resources", "rscodeio.rstheme",#"rscodeio.rstheme",
                                       package = utils::packageName())
     bright_theme_path <- system.file("resources", "rscodeio_tomorrow_night_bright.rstheme",
                                      package = utils::packageName())
