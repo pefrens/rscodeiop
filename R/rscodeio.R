@@ -104,9 +104,11 @@ uninstall_theme <- function(silent = FALSE) {
   }
 
   tryCatch({
-    # Deactivate menu theme first
-    if (!silent) message("Deactivating menu themes...")
-    deactivate_menu_theme(silent = silent)
+    # Deactivate menu theme first (only if it's actually active)
+    if (is_menu_theme_active()) {
+      if (!silent) message("Deactivating menu themes...")
+      deactivate_menu_theme(silent = silent)
+    }
 
     # Get all installed themes
     all_themes <- rstudioapi::getThemes()
@@ -256,7 +258,7 @@ deactivate_menu_theme <- function(silent = FALSE) {
     windows_original <- windows_theme_dark()
     windows_backup <- windows_theme_dark_backup()
 
-    # Restore from backups
+    # Restore from backups only if backup files exist
     success_gnome <- TRUE
     success_windows <- TRUE
 
@@ -266,6 +268,8 @@ deactivate_menu_theme <- function(silent = FALSE) {
         unlink(gnome_backup)
         if (!silent) message("Restored Gnome theme from backup")
       }
+    } else {
+      if (!silent) message("Gnome backup not found, skipping restoration")
     }
 
     if (file.exists(windows_backup)) {
@@ -274,6 +278,8 @@ deactivate_menu_theme <- function(silent = FALSE) {
         unlink(windows_backup)
         if (!silent) message("Restored Windows theme from backup")
       }
+    } else {
+      if (!silent) message("Windows backup not found, skipping restoration")
     }
 
     if (!success_gnome || !success_windows) {
@@ -307,6 +313,7 @@ is_menu_theme_active <- function() {
     return(FALSE)
   }
 
+  # Only check for backup files that actually exist
   gnome_backup_exists <- file.exists(gnome_theme_dark_backup())
   windows_backup_exists <- file.exists(windows_theme_dark_backup())
 
