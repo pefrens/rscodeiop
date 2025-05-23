@@ -10,10 +10,11 @@ deactivate_menu_theme(silent = FALSE)
 \item{silent}{Logical. If TRUE, suppress messages. Default is FALSE.}
 }
 \value{
-Logical. TRUE if deactivation was successful, FALSE otherwise.
+Logical. Always returns TRUE for compatibility.
 }
 \description{
-Restores original RStudio menu styling by restoring backed-up QSS files.
+This function is maintained for compatibility but no longer performs backup restoration
+since backup files are not part of the package structure.
 }
 \examples{
 \dontrun{

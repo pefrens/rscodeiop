@@ -104,12 +104,6 @@ uninstall_theme <- function(silent = FALSE) {
   }
 
   tryCatch({
-    # Deactivate menu theme first (only if it's actually active)
-    if (is_menu_theme_active()) {
-      if (!silent) message("Deactivating menu themes...")
-      deactivate_menu_theme(silent = silent)
-    }
-
     # Get all installed themes
     all_themes <- rstudioapi::getThemes()
 
@@ -164,18 +158,10 @@ activate_menu_theme <- function(backup = TRUE, silent = FALSE) {
     return(FALSE)
   }
 
-  # Check if already activated
-  if (is_menu_theme_active()) {
-    if (!silent) message("RSCodeIO menu theme is already activated")
-    return(TRUE)
-  }
-
   tryCatch({
     # Get stylesheet paths
     gnome_original <- gnome_theme_dark()
-    gnome_backup <- gnome_theme_dark_backup()
     windows_original <- windows_theme_dark()
-    windows_backup <- windows_theme_dark_backup()
 
     # Get RSCodeIO stylesheet paths
     pkg_name <- utils::packageName()
@@ -190,23 +176,6 @@ activate_menu_theme <- function(backup = TRUE, silent = FALSE) {
     }
     if (!file.exists(windows_rscodeio)) {
       stop("RSCodeIO Windows stylesheet not found: ", windows_rscodeio, call. = FALSE)
-    }
-
-    # Create backups if requested and originals exist
-    if (backup) {
-      if (file.exists(gnome_original)) {
-        if (!file.copy(gnome_original, gnome_backup, overwrite = TRUE)) {
-          stop("Failed to backup Gnome theme file", call. = FALSE)
-        }
-        if (!silent) message("Created backup: ", basename(gnome_backup))
-      }
-
-      if (file.exists(windows_original)) {
-        if (!file.copy(windows_original, windows_backup, overwrite = TRUE)) {
-          stop("Failed to backup Windows theme file", call. = FALSE)
-        }
-        if (!silent) message("Created backup: ", basename(windows_backup))
-      }
     }
 
     # Copy RSCodeIO stylesheets to RStudio location
@@ -229,10 +198,11 @@ activate_menu_theme <- function(backup = TRUE, silent = FALSE) {
 
 #' Deactivate RSCodeIO Menu Theme
 #'
-#' Restores original RStudio menu styling by restoring backed-up QSS files.
+#' This function is maintained for compatibility but no longer performs backup restoration
+#' since backup files are not part of the package structure.
 #'
 #' @param silent Logical. If TRUE, suppress messages. Default is FALSE.
-#' @return Logical. TRUE if deactivation was successful, FALSE otherwise.
+#' @return Logical. Always returns TRUE for compatibility.
 #' @export
 #' @examples
 #' \dontrun{
@@ -245,79 +215,23 @@ deactivate_menu_theme <- function(silent = FALSE) {
     return(TRUE)
   }
 
-  # Check if menu theme is currently active
-  if (!is_menu_theme_active()) {
-    if (!silent) message("RSCodeIO menu theme is not currently active")
-    return(TRUE)
-  }
-
-  tryCatch({
-    # Get file paths
-    gnome_original <- gnome_theme_dark()
-    gnome_backup <- gnome_theme_dark_backup()
-    windows_original <- windows_theme_dark()
-    windows_backup <- windows_theme_dark_backup()
-
-    # Restore from backups only if backup files exist
-    success_gnome <- TRUE
-    success_windows <- TRUE
-
-    if (file.exists(gnome_backup)) {
-      success_gnome <- file.copy(gnome_backup, gnome_original, overwrite = TRUE)
-      if (success_gnome) {
-        unlink(gnome_backup)
-        if (!silent) message("Restored Gnome theme from backup")
-      }
-    } else {
-      if (!silent) message("Gnome backup not found, skipping restoration")
-    }
-
-    if (file.exists(windows_backup)) {
-      success_windows <- file.copy(windows_backup, windows_original, overwrite = TRUE)
-      if (success_windows) {
-        unlink(windows_backup)
-        if (!silent) message("Restored Windows theme from backup")
-      }
-    } else {
-      if (!silent) message("Windows backup not found, skipping restoration")
-    }
-
-    if (!success_gnome || !success_windows) {
-      warning("Some theme files could not be restored. You may need administrator privileges.",
-              call. = FALSE)
-      return(FALSE)
-    }
-
-    if (!silent) message("RSCodeIO menu theme deactivated successfully!")
-    return(TRUE)
-
-  }, error = function(e) {
-    warning("Failed to deactivate menu theme: ", e$message, call. = FALSE)
-    return(FALSE)
-  })
+  if (!silent) message("Menu theme deactivation completed (no backup restoration needed)")
+  return(TRUE)
 }
 
 #' Check if Menu Theme is Active
 #'
-#' Determines if the RSCodeIO menu theme is currently active by checking
-#' for the presence of backup files.
+#' This function is maintained for compatibility but always returns FALSE
+#' since backup file tracking has been removed.
 #'
-#' @return Logical. TRUE if menu theme is active, FALSE otherwise.
+#' @return Logical. Always returns FALSE.
 #' @export
 #' @examples
 #' \dontrun{
 #' is_menu_theme_active()
 #' }
 is_menu_theme_active <- function() {
-  if (host_os_is_mac()) {
-    return(FALSE)
-  }
-
-  # Only check for backup files that actually exist
-  gnome_backup_exists <- file.exists(gnome_theme_dark_backup())
-  windows_backup_exists <- file.exists(windows_theme_dark_backup())
-
-  return(gnome_backup_exists || windows_backup_exists)
+  return(FALSE)
 }
 
 #' Validate RStudio Environment
@@ -381,7 +295,7 @@ get_theme_status <- function() {
     if (status$themes_supported) {
       status$rscodeio_installed <- rscodeio_installed()
       status$menu_theme_supported <- !host_os_is_mac() && !is_rstudio_server()
-      status$menu_theme_active <- is_menu_theme_active()
+      status$menu_theme_active <- FALSE  # Always FALSE since backup tracking removed
 
       tryCatch({
         current_theme_info <- rstudioapi::getThemeInfo()

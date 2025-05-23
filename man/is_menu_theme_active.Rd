@@ -7,11 +7,11 @@
 is_menu_theme_active()
 }
 \value{
-Logical. TRUE if menu theme is active, FALSE otherwise.
+Logical. Always returns FALSE.
 }
 \description{
-Determines if the RSCodeIO menu theme is currently active by checking
-for the presence of backup files.
+This function is maintained for compatibility but always returns FALSE
+since backup file tracking has been removed.
 }
 \examples{
 \dontrun{
